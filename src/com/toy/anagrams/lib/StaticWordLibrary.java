@@ -31,6 +31,8 @@
 
 package com.toy.anagrams.lib;
 
+import java.util.Random;
+
 /**
  * Implementation of the logic for the Anagram Game application.
  */
@@ -83,53 +85,7 @@ final class StaticWordLibrary extends WordLibrary {
         "unsigned",
         "traditional"};
 
-    private static final String[] SCRAMBLED_WORD_LIST = {
-        "batsartcoin",
-        "maibuguos",
-        "ratimhteci",
-        "abkclssha",
-        "ibmtpa",
-        "iccrmutsnaec",
-        "ocbmnitaoni",
-        "ocsnqeeutnyl",
-        "ocsnroitmu",
-        "edrcmeneitgn",
-        "edepdnneyc",
-        "idasbmgiauet",
-        "ydanicm",
-        "neacsplutaoni",
-        "qeiuaveltn",
-        "xerpseisno",
-        "aficilatet",
-        "rfgaemtn",
-        "ehaxedicalm",
-        "milpmeneatitno",
-        "niidtsniugsiahleb",
-        "niehiratcen",
-        "nietnret",
-        "ajav",
-        "olacilazitno",
-        "imrcpoorecssro",
-        "anivagitno",
-        "poitimazitno",
-        "aparemert",
-        "aprtcki",
-        "ipkcel",
-        "opylomprich",
-        "irogorsuyl",
-        "isumtlnaoesuyl",
-        "psceficitaoni",
-        "tsurtcreu",
-        "elixalc",
-        "ilekiwse",
-        "amanegemtn",
-        "aminupalet",
-        "amhtmetacsi",
-        "ohjtvaa",
-        "evtrxe",
-        "nuisngde",
-        "rtdatioialn"
-    };
+   
     
     final static WordLibrary DEFAULT = new StaticWordLibrary();
 
@@ -153,8 +109,33 @@ final class StaticWordLibrary extends WordLibrary {
      * @param idx index of required word
      * @return word at that index in its scrambled form
      */
-    public String getScrambledWord(int idx) {
-        return SCRAMBLED_WORD_LIST[idx];
+    public String getScrambledWord(int idx, int level) {
+    	int n = WORD_LIST[idx].length();
+    	String st = WORD_LIST[idx];
+    	
+    	for(int i = 0; i < (level*2); i++) {
+	    	Random r = new Random();
+	    	int ran1 = 0;
+	    	int ran2 = 0;
+	    	while(ran1 == ran2) {
+	    	 ran1 = r.nextInt(n-1);
+	    	 ran2 = r.nextInt(n-1);
+	    	}
+	    	char[] a = new char[n];
+	    	for(int j = 0; j < n; j++) {
+	    	 a[j] = WORD_LIST[idx].charAt(j);
+	    	}
+	    	char tmp = WORD_LIST[idx].charAt(ran1);
+	    	a[ran1] = a[ran2];
+	    	a[ran2] = tmp;
+	    	st = new String(a);
+	    	//デバッグ用です。
+	    	//System.out.println(i+1 + ":" + a[ran1] + "と" + tmp + "を交換したよ");
+    	}
+
+
+    	return st;
+    	 
     }
 
     /**
