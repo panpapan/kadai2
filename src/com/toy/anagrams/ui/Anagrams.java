@@ -84,7 +84,14 @@ public class Anagrams extends JFrame {
         
         initComponents();
         getRootPane().setDefaultButton(guessButton);
-        scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
+        String data = (String)selectLevel.getSelectedItem();		
+        if(data.equals("Level 1")) {
+        	scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx, 1));
+        } else if(data.equals("Level 2")) {
+        	scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx, 2));
+        } else {
+        	scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx, 3));
+        }
         pack();
         guessedWord.requestFocusInWindow();
         // Center in the screen
@@ -257,7 +264,14 @@ public class Anagrams extends JFrame {
         wordIdx = (wordIdx + 1) % wordLibrary.getSize();
 
         feedbackLabel.setText(" ");
-        scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
+        String data = (String)selectLevel.getSelectedItem();		
+        if(data.equals("Level 1")) {
+        	scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx, 1));
+        } else if(data.equals("Level 2")) {
+        	scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx, 2));
+        } else {
+        	scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx, 3));
+        }
         guessedWord.setText("");
         getRootPane().setDefaultButton(guessButton);
 
